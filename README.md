@@ -6,7 +6,7 @@ It is a goog idea to go to the ENDPOINTS and read the examples
 
 ## To hide your API KEYS
 
-Create a archive .env (see get_started.py).
+Create a archive .env (see main.py).
 
 ## To create a virtual environment
 In your prmpt:
