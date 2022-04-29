@@ -2,6 +2,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+import pandas as pd
 
 load_dotenv()
 
@@ -15,5 +16,14 @@ oauth_url = f"https://openexchangerates.org/api/latest.json?app_id={API_KEY}&bas
 
 res = requests.get(url=oauth_url)
 
+
 with open("token.json", "w") as f:
     f.write(json.dumps(res.json(), indent=4))
+
+
+df = pd.DataFrame(res.json())
+
+print(df)
+
+
+
