@@ -20,10 +20,16 @@ res = requests.get(url=oauth_url)
 with open("token.json", "w") as f:
     f.write(json.dumps(res.json(), indent=4))
 
-
 df = pd.DataFrame(res.json())
+# df.info()
+df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+#soluction for the error given without "unit='s': https://stackoverflow.com/questions/51587468/datetime-defaulting-to-1970-in-pandas"
+
 
 print(df)
+print(df.dtypes)
+
+
 
 
 
