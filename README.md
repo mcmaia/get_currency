@@ -26,4 +26,45 @@ pip install python-dotenv
 
 ### Do not forget to install all the instances you are importing in the virtual environment.
 
+# Explaining the code:
+```
+import requests
+import json
+import os
+from dotenv import load_dotenv
+import pandas as pd
+```
+First, I imported all the libraries I was going to use. 
 
+```
+API_KEY = os.getenv("API_KEY")
+base = "USD"
+# Here I am converting Dollars to Euros. Check the documentation to see what kind of rates you would need.
+rates = "EUR"
+
+
+oauth_url = f"https://openexchangerates.org/api/latest.json?app_id={API_KEY}&base={base}&&symbols={rates}"
+
+res = requests.get(url=oauth_url)
+```
+Then, I created some variables to use in the URL. After that, I made a GET request to this URL.
+
+```
+with open("token.json", "w") as f:
+    f.write(json.dumps(res.json(), indent=4))
+
+```
+Afterwasrd, I created a json file to display the response.
+
+```
+df = pd.DataFrame(res.json())
+# df.info()
+df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+#soluction for the error given without "unit='s': https://stackoverflow.com/questions/51587468/datetime-defaulting-to-1970-in-pandas"
+
+
+print(df)
+print(df.dtypes)
+```
+
+Lastly, I created a dataframe, changed the timestemp to the human view and printed the result in the terminal.
