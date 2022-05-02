@@ -54,7 +54,7 @@ with open("token.json", "w") as f:
     f.write(json.dumps(res.json(), indent=4))
 
 ```
-Afterwasrd, I created a json file to display the response.
+Afterwards, I created a json file to display the response.
 
 ```python
 df = pd.DataFrame(res.json())
